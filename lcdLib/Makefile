@@ -24,7 +24,7 @@ clean:
 
 lcddemo.elf: lcddemo.o libLcd.a 
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ -lTimer
-lcddemo2.elf: lcddemo2.o libLcd.a 
+lcddemo2.elf: lcddemo2.o libLcd.a wtd_handler.o
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ -lTimer
 
 load: lcddemo.elf
