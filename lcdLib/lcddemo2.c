@@ -7,7 +7,7 @@
 #include "lcddraw.h"
 
 short redrawScreen = 1;
-u_int fontFgColor = COLOR_GREEN;
+u_int fontFgColor = COLOR_YELLOW;
 
 void draw_christmas_tree(char offset_r, char offset_c){
   for(int r = 0; r< 40; r++){
@@ -29,7 +29,7 @@ void draw_christmas_tree(char offset_r, char offset_c){
     }
   }
   fillRectangle((offset_c-10), 120, 20, 15, COLOR_BROWN);
-  fillRectangle(0, 135, 30, 40, COLOR_WHITE);
+  fillRectangle(0, 135, 400, 40, COLOR_WHITE);
   
 }
 
@@ -40,7 +40,7 @@ void wdt_c_handler()
   secCount ++;
   if (secCount == 250) {		/* once/sec */
     secCount = 0;
-    fontFgColor = (fontFgColor == COLOR_GREEN) ? COLOR_BLACK : COLOR_GREEN;
+    fontFgColor = (fontFgColor == COLOR_YELLOW) ? COLOR_RED : COLOR_YELLOW;
     redrawScreen = 1;
   }
 }
@@ -48,8 +48,7 @@ void wdt_c_handler()
 
       
 /** Initializes everything, clears the screen, draws "hello" and a square */
-int main()
-{
+int main(){
  
   
   //P1DIR |= LED_GREEN;		/**< Green led on when CPU on */		
@@ -60,30 +59,30 @@ int main()
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
   
-  clearScreen(COLOR_BLUE);
+  //clearScreen(COLOR_BLUE);
   while (1) {			/* forever */
   if (redrawScreen) {
-    redrawScreen = 0;
-    drawString5x7(20,20, "hello", fontFgColor, COLOR_BLUE);
-      drawString5x7(15,20, "merry", COLOR_GREEN, COLOR_RED);
-    }
+  redrawScreen = 0;
+    drawString11x16(60,7, "~", fontFgColor, COLOR_BLUE);
+    //drawString5x7(15,20, "merry", COLOR_GREEN, COLOR_RED);
+  }
     //P1OUT &= ~LED_GREEN;	/* green off */
-    or_sr(0x10);		/**< CPU OFF */
+  or_sr(0x10);		/**< CPU OFF */
     //P1OUT |= LED_GREEN;		/* green on */
-    }
+  }
 
   
 
 
   
-  configureClocks();
-  lcd_init();
+  //configureClocks();
+  //lcd_init();
   u_char width = screenWidth, height = screenHeight;
 
   clearScreen(COLOR_BLUE);
-  drawString11x16(1,10, "merry", COLOR_RED, COLOR_BLUE);
-  drawString5x7(3,29, "christmas", COLOR_RED, COLOR_BLUE);
-  drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
+  drawString11x16(1,10, "merry", COLOR_WHITE, COLOR_BLUE);
+  drawString5x7(3,29, "christmas", COLOR_WHITE, COLOR_BLUE);
+  //drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
   draw_christmas_tree(20,65);
   
   
