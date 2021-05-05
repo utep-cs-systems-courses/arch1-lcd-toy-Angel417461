@@ -29,7 +29,7 @@ void draw_christmas_tree(char offset_r, char offset_c){
     }
   }
   fillRectangle((offset_c-10), 120, 20, 15, COLOR_BROWN);
-  fillRectangle(0, 135, 400, 40, COLOR_WHITE);
+  fillRectangle(0, 135, 30, 40, COLOR_WHITE);
   
 }
 
@@ -54,23 +54,23 @@ int main()
   
   //P1DIR |= LED_GREEN;		/**< Green led on when CPU on */		
   //P1OUT |= LED_GREEN;
-  // configureClocks();
-  //lcd_init();
+  configureClocks();
+  lcd_init();
   
-  // enableWDTInterrupts();      /**< enable periodic interrupt */
-  //or_sr(0x8);	              /**< GIE (enable interrupts) */
+  enableWDTInterrupts();      /**< enable periodic interrupt */
+  or_sr(0x8);	              /**< GIE (enable interrupts) */
   
-  //clearScreen(COLOR_BLUE);
-  //while (1) {			/* forever */
-  //if (redrawScreen) {
-  //  redrawScreen = 0;
-  //  drawString5x7(20,20, "hello", fontFgColor, COLOR_BLUE);
-      //drawString5x7(15,20, "merry", COLOR_GREEN, COLOR_RED);
-  //  }
+  clearScreen(COLOR_BLUE);
+  while (1) {			/* forever */
+  if (redrawScreen) {
+    redrawScreen = 0;
+    drawString5x7(20,20, "hello", fontFgColor, COLOR_BLUE);
+      drawString5x7(15,20, "merry", COLOR_GREEN, COLOR_RED);
+    }
     //P1OUT &= ~LED_GREEN;	/* green off */
-    //or_sr(0x10);		/**< CPU OFF */
+    or_sr(0x10);		/**< CPU OFF */
     //P1OUT |= LED_GREEN;		/* green on */
-    //}
+    }
 
   
 
