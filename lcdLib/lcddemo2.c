@@ -29,7 +29,7 @@ void draw_christmas_tree(char offset_r, char offset_c){
     }
   }
   fillRectangle((offset_c-10), 120, 20, 15, COLOR_BROWN);
-  fillRectangle(0, 135, 400, 40, COLOR_WHITE);
+  fillRectangle(0, 135, 128, 40, COLOR_WHITE);
   
 }
 
@@ -58,6 +58,14 @@ int main(){
   
   enableWDTInterrupts();      /**< enable periodic interrupt */
   or_sr(0x8);	              /**< GIE (enable interrupts) */
+
+  u_char width = screenWidth, height = screenHeight;
+
+  clearScreen(COLOR_BLUE);
+  drawString11x16(1,10, "merry", COLOR_WHITE, COLOR_BLUE);
+  drawString5x7(3,29, "christmas", COLOR_WHITE, COLOR_BLUE);
+  //drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
+  draw_christmas_tree(20,65);
   
   //clearScreen(COLOR_BLUE);
   while (1) {			/* forever */
@@ -77,13 +85,13 @@ int main(){
   
   //configureClocks();
   //lcd_init();
-  u_char width = screenWidth, height = screenHeight;
+  //u_char width = screenWidth, height = screenHeight;
 
-  clearScreen(COLOR_BLUE);
-  drawString11x16(1,10, "merry", COLOR_WHITE, COLOR_BLUE);
-  drawString5x7(3,29, "christmas", COLOR_WHITE, COLOR_BLUE);
+  //clearScreen(COLOR_BLUE);
+  //drawString11x16(1,10, "merry", COLOR_WHITE, COLOR_BLUE);
+  //drawString5x7(3,29, "christmas", COLOR_WHITE, COLOR_BLUE);
   //drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
-  draw_christmas_tree(20,65);
+  //draw_christmas_tree(20,65);
   
   
 }
