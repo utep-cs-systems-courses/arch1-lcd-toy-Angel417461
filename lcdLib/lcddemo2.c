@@ -33,26 +33,58 @@ void draw_christmas_tree(char offset_r, char offset_c){
   
 }
 
-void wdt_c_handler()
-{
+void wdt_c_handler(){
+  
   static int secCount = 0;
 
-  secCount ++;
-  if (secCount == 250) {		/* once/sec */
+  secCount++;
+  
+  if (secCount == 25) {		/* once/sec */
     secCount = 0;
-    fontFgColor = (fontFgColor == COLOR_YELLOW) ? COLOR_RED : COLOR_YELLOW;
+    
+    if (fontFgColor == COLOR_YELLOW){
+      fontFgColor = COLOR_RED;
+    }else{
+      fontFgColor = COLOR_YELLOW;
+    } 
     redrawScreen = 1;
   }
+
 }
 
+void animation(){
+  
+  if (redrawScreen) {
+    redrawScreen = 0;
+    static char state = 0;
+    switch(state){
+    case 0:
+      drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
+      state++;
+      break;
+    case 1:
+      drawString11x16(60,7, "~", COLOR_BLUE, COLOR_BLUE);
+      drawString11x16(60,5, "~", COLOR_RED, COLOR_BLUE);
+      state++;
+      break;
+    case 2:
+      drawString11x16(60,5, "~", COLOR_BLUE, COLOR_BLUE);
+      drawString11x16(60,3, "~", COLOR_YELLOW, COLOR_BLUE);
+      state++;
+      break;
+    case 3:
+      drawString11x16(60,3, "~", COLOR_BLUE, COLOR_BLUE);
+      drawString11x16(60,5, "~", COLOR_RED, COLOR_BLUE);
+      state++;
+      break;
+    default: state = 0;
+    }
+  }
+}
+  
 
-      
-/** Initializes everything, clears the screen, draws "hello" and a square */
 int main(){
  
-  
-  //P1DIR |= LED_GREEN;		/**< Green led on when CPU on */		
-  //P1OUT |= LED_GREEN;
   configureClocks();
   lcd_init();
   
@@ -64,34 +96,11 @@ int main(){
   clearScreen(COLOR_BLUE);
   drawString11x16(1,10, "merry", COLOR_WHITE, COLOR_BLUE);
   drawString5x7(3,29, "christmas", COLOR_WHITE, COLOR_BLUE);
-  //drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
   draw_christmas_tree(20,65);
+
   
-  //clearScreen(COLOR_BLUE);
-  while (1) {			/* forever */
-  if (redrawScreen) {
-  redrawScreen = 0;
-    drawString11x16(60,7, "~", fontFgColor, COLOR_BLUE);
-    //drawString5x7(15,20, "merry", COLOR_GREEN, COLOR_RED);
+  while (1) {    /* forever */
+    animation();
+    or_sr(0x10);		/**< CPU OFF */
   }
-    //P1OUT &= ~LED_GREEN;	/* green off */
-  or_sr(0x10);		/**< CPU OFF */
-    //P1OUT |= LED_GREEN;		/* green on */
-  }
-
-  
-
-
-  
-  //configureClocks();
-  //lcd_init();
-  //u_char width = screenWidth, height = screenHeight;
-
-  //clearScreen(COLOR_BLUE);
-  //drawString11x16(1,10, "merry", COLOR_WHITE, COLOR_BLUE);
-  //drawString5x7(3,29, "christmas", COLOR_WHITE, COLOR_BLUE);
-  //drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
-  //draw_christmas_tree(20,65);
-  
-  
 }
