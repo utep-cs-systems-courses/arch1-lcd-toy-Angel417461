@@ -7,7 +7,6 @@
 #include "lcddraw.h"
 
 short redrawScreen = 1;
-u_int fontFgColor = COLOR_YELLOW;
 
 void draw_christmas_tree(char offset_r, char offset_c){
   for(int r = 0; r< 40; r++){
@@ -39,17 +38,10 @@ void wdt_c_handler(){
 
   secCount++;
   
-  if (secCount == 25) {		/* once/sec */
+  if (secCount == 25) {	
     secCount = 0;
-    
-    if (fontFgColor == COLOR_YELLOW){
-      fontFgColor = COLOR_RED;
-    }else{
-      fontFgColor = COLOR_YELLOW;
-    } 
     redrawScreen = 1;
   }
-
 }
 
 void animation(){
