@@ -1,13 +1,52 @@
-/** \file lcddemo.c
- *  \brief A simple demo that draws a string and square
- */
-
 #include <libTimer.h>
 #include "lcdutils.h"
 #include "lcddraw.h"
 
 short redrawScreen = 1;
 
+static char state = 0;
+
+/*void animation(){
+  if (redrawScreen) {
+    redrawScreen = 0;
+    switch(state){
+    case 0:
+      state0();
+      break;    
+    case 1:
+      state1();
+      break;
+    case 2:
+      state2();
+      break;
+    case 3:
+      state3();
+      break;
+    default: state = 0;
+    }
+  }
+}
+*/
+
+void state0(){
+  drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
+  state++;
+}
+void state1(){
+  drawString11x16(60,7, "~", COLOR_BLUE, COLOR_BLUE);
+  drawString11x16(60,5, "~", COLOR_RED, COLOR_BLUE);
+  state++;
+}
+void state2(){
+  drawString11x16(60,5, "~", COLOR_BLUE, COLOR_BLUE);
+  drawString11x16(60,3, "~", COLOR_YELLOW, COLOR_BLUE);
+  state++;
+}
+void state3(){
+  drawString11x16(60,3, "~", COLOR_BLUE, COLOR_BLUE);
+  drawString11x16(60,5, "~", COLOR_RED, COLOR_BLUE);
+  state++;
+}
 void draw_christmas_tree(char offset_r, char offset_c){
   for(int r = 0; r< 40; r++){
     for (int c = 0; c <= r/2; c++){
@@ -41,36 +80,6 @@ void wdt_c_handler(){
   if (secCount == 25) {	
     secCount = 0;
     redrawScreen = 1;
-  }
-}
-
-void animation(){
-  
-  if (redrawScreen) {
-    redrawScreen = 0;
-    static char state = 0;
-    switch(state){
-    case 0:
-      drawString11x16(60,7, "~", COLOR_YELLOW, COLOR_BLUE);
-      state++;
-      break;
-    case 1:
-      drawString11x16(60,7, "~", COLOR_BLUE, COLOR_BLUE);
-      drawString11x16(60,5, "~", COLOR_RED, COLOR_BLUE);
-      state++;
-      break;
-    case 2:
-      drawString11x16(60,5, "~", COLOR_BLUE, COLOR_BLUE);
-      drawString11x16(60,3, "~", COLOR_YELLOW, COLOR_BLUE);
-      state++;
-      break;
-    case 3:
-      drawString11x16(60,3, "~", COLOR_BLUE, COLOR_BLUE);
-      drawString11x16(60,5, "~", COLOR_RED, COLOR_BLUE);
-      state++;
-      break;
-    default: state = 0;
-    }
   }
 }
   

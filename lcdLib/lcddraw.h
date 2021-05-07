@@ -68,6 +68,15 @@ void drawChar11x16(u_char col, u_char row, char c,
  */
 void drawRectOutline(u_char colMin, u_char rowMin, u_char width, u_char height,
 		     u_int colorBGR);
+
+
+void animation();
+
+void state0();
+void state1();
+void state2();
+void state3();
+
 #endif // included
 
 
