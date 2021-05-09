@@ -1,5 +1,6 @@
-#include"lcddemo2.c"
-	.file "animation.c"
+	.arch msp430g2553
+	.p2align 1,0
+	
 	
 	.data
 state:
@@ -20,11 +21,12 @@ animation:
 	jz out
 	mov #0, &redrawScreen
 
+
 	cmp #5, &state
 	jhs default
 
 	mov &state, r12
-	add r12, r12
+	add #3, r12
 	mov jt(r12), r0
 
 case0:
